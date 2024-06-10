@@ -1,0 +1,9 @@
+/*Màn hình vị trí*/
+#Vi_Tri {
+    position: absolute;
+    left: 160px;
+    top: 11px;
+    width: 1200px;
+    height: 600px;
+    background-color:rgb(240, 236, 11);
+}

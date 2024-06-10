@@ -1,0 +1,9 @@
+/*Màn hình chỗ trống*/
+#Cho_Trong {
+    position: absolute;
+    left: 160px;
+    top: 11px;
+    width: 1200px;
+    height: 600px;
+    background-color: rgb(0, 255, 0);
+}

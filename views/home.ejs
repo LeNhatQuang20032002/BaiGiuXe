@@ -1,0 +1,195 @@
+<html>
+    <!-- Phần Header của Website -->
+    <head>
+        <!-- ////////////// GỌI CÁC CSS //////////////  -->
+        <link rel="stylesheet" href= "gioithieu.css">
+        <link rel="stylesheet" href= "vitri.css">
+        <link rel="stylesheet" href= "banggia.css">
+        <link rel="stylesheet" href= "lienhe.css">
+        <link rel="stylesheet" href= "chotrong.css">
+        <link rel="stylesheet" href= "lichsu.css">        
+        <link rel="stylesheet" href= "slidebar.css">
+        <link rel="stylesheet" href= "login2.css">
+        
+        <!-- ////////////// CHƯƠNG TRÌNH HỆ THỐNG //////////////  -->
+        <title>Scada hệ thống giám sát trên internet</title>
+        <script src = "js/jquery-3.7.1.min.js"></script>
+        <script src = "js/FileSaver.min.js"></script>
+        <script src = "socket.io/socket.io.js"></script>
+        <script>
+            var socket = io(window.location.hostname + ":3000") // IP tĩnh (hoặc IP động, hoặc localhost)
+        </script>
+
+        <script src = "js/FC1_Common.js"></script>
+        <script src = "js/FC2_Login.js"></script>
+        <script src = "js/FC3_LienHe.js"></script>
+        <script src = "js/FC4_LichSu.js"></script>
+    </head>
+
+    <!-- Phần thân của website -->
+    <body>
+        <!-- ////////////// Code cho slidebar////////////// -->
+        <div id = "slidebar">
+            <!--Nút chọn màn hình giới thiệu-->
+            <button id="btt_Gioi_Thieu" onclick="
+                fn_ScreenChange('Gioi_Thieu','Vi_Tri','Bang_Gia','Lien_He','Cho_Trong','Lich_Su');
+            ">Giới Thiệu</button>
+            <!--Nút chọn màn hình vị trí-->
+            <button id="btt_Vi_Tri" onclick="
+                fn_ScreenChange('Vi_Tri','Gioi_Thieu','Bang_Gia','Lien_He','Cho_Trong','Lich_Su');
+            ">Vị Trí</button>
+            <!--Nút chọn màn hình bảng giá-->
+            <button id="btt_Bang_Gia" onclick="
+                fn_ScreenChange('Bang_Gia','Gioi_Thieu','Vi_Tri','Lien_He','Cho_Trong','Lich_Su');
+            ">Bảng Giá</button>
+            <!--Nút chọn màn hình đặc điểm-->
+            <button id="btt_Lien_He" onclick="
+                fn_ScreenChange('Lien_He','Gioi_Thieu','Bang_Gia','Vi_Tri','Cho_Trong','Lich_Su');
+            ">Liên Hệ</button>
+            <!--Nút chọn màn hình chỗ trống-->
+            <button id="btt_Cho_Trong" onclick="
+                fn_ScreenChange('Cho_Trong','Gioi_Thieu','Bang_Gia','Vi_Tri','Lien_He','Lich_Su');
+            ">Chỗ Trống</button>    
+            <!--Nút chọn màn hình lịch sử--> 
+            <% if (isAdmin) { %>
+                <button id="btt_Lich_Su" onclick="fn_ScreenChange('Lich_Su','Cho_Trong','Gioi_Thieu','Bang_Gia','Vi_Tri','Lien_He');">Lịch Sử</button>
+            <% } %>
+
+            <!--Nút đăng nhập--> 
+            <% if (!isAdmin) { %>
+                <button id="btt_Lich_Su" onclick="toggleLoginDiv(true);">Đăng nhập <br>để xem lịch sử</button>
+            <% } %>                               
+        </div>
+        <!-- //////////////Code cho màn hình chính////////////// -->
+        <div id = "Gioi_Thieu">
+            <img src = "images/BackGround.png" height="600" style="position: absolute; top: 0px; left:400px;">
+            <img src = "images/Logo.png" width="100" height="80" style="position: absolute; top: 0px; left:400px;">           
+            <p style="font-size: 18px; color: rgb(255, 255, 0); position: absolute; top: 50px; left: 30px;"> Chuyên giữ xe ô tô Thủ Đức</p>
+            <p style="font-size: 18px; color: rgb(255, 255, 0); position: absolute; top: 100px; left: 30px;"> Là bãi giữ xe ô tô ở Thành Phố Thủ Đức </p>
+            <p style="font-size: 18px; color: rgb(255, 255, 0); position: absolute; top: 150px; left: 30px;"> Được đầu tư bài bản đảm bảo an ninh</p>
+            <p style="font-size: 18px; color: rgb(255, 255, 0); position: absolute; top: 200px; left: 30px;"> Tự động hoá trong việc cất và lấy xe </p>
+            <p style="font-size: 18px; color: rgb(255, 255, 0); position: absolute; top: 250px; left: 30px;"> Sạch sẽ cho tất cả các khách hàng giữ xe tại đây </p>
+            <p style="font-size: 18px; color: rgb(255, 255, 0); position: absolute; top: 300px; left: 30px;"> Chúng tôi nhận giữ xe ô tô 4,7,9,16 chỗ ngồi</p>
+            <p style="font-size: 18px; color: rgb(255, 255, 0); position: absolute; top: 350px; left: 30px;"> Nhận giữ xe ô tô qua đêm </p>
+            <p style="font-size: 18px; color: rgb(255, 255, 0); position: absolute; top: 400px; left: 30px;"> với giá giữ xe tiết kiệm nhất Thủ Đức </p>
+        </div>
+
+        <!-- //////////////Code cho màn hình 1////////////// -->
+        <div id = "Vi_Tri">            
+            <p style="font-size: 20px; color: rgb(10, 10, 10); position: absolute; top: 20px; left: 30px;"> Vị trí bãi giữ xe</p>
+            <p style="font-size: 20px; color: rgb(10, 10, 10); position: absolute; top: 50px; left: 30px;">Địa chỉ: Phường Trường Thọ Quận Thủ Đức</p>
+            <a href="https://www.google.com/maps/search/17a+khu+ph%E1%BB%91+5+ph%C6%B0%E1%BB%9Dng+tr%C6%B0%E1%BB%9Dng+th%E1%BB%8D/@10.8347045,106.7263668,14z?hl=vi&entry=ttu" style="color: rgb(0, 0, 0);position: absolute; top: 100px; left: 30px;">Xem bản đồ lớn hơn</a>
+
+            <img src = "images/ban_do.png" width="1140" height="450" style="position: absolute; top: 130px; left:30px;">
+
+        </div>
+
+        <!-- //////////////Code cho màn hình 2////////////// -->
+        <div id = "Bang_Gia">
+            <img src = "images/bang_gia.png" width="1140" height="540px" style="position: absolute; top: 30px; left:30px;">
+           
+        </div>
+
+        <!-- //////////////Code cho màn hình 3////////////// -->
+        <div id = "Lien_He">
+            <img src = "images/khung_lien_he.png" width="500" height="200" style="position: absolute; top: 0px; left:0px;">
+            <img src = "images/call.png" width="50" height="20" style="position: absolute; top: 80px; left:130px;">
+            <p style="font-size: 20px; color: rgb(11, 11, 10); position: absolute; top: 60px; left: 200px;"> 0347978096</p>
+            <img src = "images/khung_lien_he.png" width="800" height="200" style="position: absolute; top: 0px; left:400px;">
+            <img src = "images/gmail.png" width="40" height="40" style="position: absolute; top: 70px; left:580px;">
+            <p style="font-size: 20px; color: rgb(11, 11, 10); position: absolute; top: 60px; left: 650px;"> lenquang1808@gmail.com</p>
+            <p style="font-size: 18px; color: rgb(255, 255, 0); position: absolute; top: 120px; left: 60px;"> Nhận những thông tin mới nhất và các ưu đãi đặc biệt bằng cách để lại địa chỉ email của bạn!</p>
+
+            <input id="tbx_email" type="email" name="email" placeholder="Email" style="font-size: 18px; color: rgb(11, 167, 240);; position: absolute; top: 180px; left: 60px; width:300px;"><br>
+            <button id="btn_gui" onclick="fn_Gui_Lien_He();" style="font-size: 18px; color: rgb(0, 0, 128);; position: absolute; top: 220px; left: 60px; width:100px;">Gửi</button>
+            
+        </div>   
+        
+        <!-- //////////////Code cho màn hình 4////////////// -->
+        <div id = "Cho_Trong">
+            <img src = "images/cho_trong.png" width="1140" height="540px" style="position: absolute; top: 30px; left:30px;">
+            <img id="img_xe_1" src = "images/xe.png" style="position: absolute; top: 145px; left:308px;height:100px">
+            <img id="img_xe_2" src = "images/xe.png" style="position: absolute; top: 356px; left:308px;height:100px">
+            <img id="img_xe_3" src = "images/xe.png" style="position: absolute; top: 145px; left:540px;height:100px">
+            <img id="img_xe_4" src = "images/xe.png" style="position: absolute; top: 356px; left:540px;height:100px">
+            <img id="img_xe_5" src = "images/xe.png" style="position: absolute; top: 145px; left:758px;height:100px">
+            <img id="img_xe_6" src = "images/xe.png" style="position: absolute; top: 356px; left:758px;height:100px">
+            <img id="img_xe_7" src = "images/xe.png" style="position: absolute; top: 145px; left:968px;height:100px">
+            <img id="img_xe_8" src = "images/xe.png" style="position: absolute; top: 356px; left:968px;height:100px">
+            
+            <script>
+                fn_Show_Hide('img_xe_1','VT_1');
+                fn_Show_Hide('img_xe_2','VT_2');
+                fn_Show_Hide('img_xe_3','VT_3');
+                fn_Show_Hide('img_xe_4','VT_4');
+                fn_Show_Hide('img_xe_5','VT_5');
+                fn_Show_Hide('img_xe_6','VT_6');
+                fn_Show_Hide('img_xe_7','VT_7');
+                fn_Show_Hide('img_xe_8','VT_8');
+            </script>
+        </div>
+
+        <!-- //////////////Code cho màn hình 5////////////// -->
+        <div id = "Lich_Su">
+            <% if (isAdmin) { %>
+            <p>Chào mừng <%= username %>! <a href="/logout">Đăng xuất</a></p>
+            <p>Chọn thời gian để tìm lịch sử</p>
+            
+            <!--Date time piker-->
+            <label id="lb_Search_Start">Từ:</label>
+            <input id="dtpk_Search_Start" type="datetime-local">
+            <label id="lb_Search_End">Đến:</label>
+            <input id="dtpk_Search_End" type="datetime-local">
+            <!--Nút tìm kiếm-->
+            <button id="btt_Search" class="btn" onclick="fn_SQL_By_Time();"></i> TÌM KIẾM</button>
+            <!--Nút Xuất báo cáo Excel-->
+            <button id="btt_Excel" class="btn" onclick="fn_excel();"></i> BÁO CÁO</button>
+
+            <!--Table display-->
+            <div id = "div_Table_01">
+                <table id="table_01" >
+                    <thead>
+                    <tr>
+                        <th>Biển số</th>
+                        <th>Thời gian vào</th>
+                        <th>Thời gian ra</th>
+                        <th>Chi phí</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <% } %>
+        </div>  
+        
+        <!-- Login form -->
+        <div id="loginDiv">
+            <div class="login-container">
+                <h2>Đăng nhập</h2>
+                <form action="/" method="POST">
+                    <label for="username">Tên người dùng:</label>
+                    <input type="text" id="username" name="username" required>
+                    <label for="password">Mật khẩu:</label>
+                    <input type="password" id="password" name="password" required>
+                    <button type="submit">Đăng nhập</button>
+                    <p>
+                        <button onclick="toggleLoginDiv(false);" style="background-color:rgb(12, 14, 145);">Đóng</button>
+                    </p>
+                </form>
+            </div>
+        </div>
+        <%
+        %>
+        <!-- /////////Code chạy khi mới load trang////////// -->
+        <% if (!isAdmin) { %>
+        <script>
+            fn_ScreenChange('Cho_Trong','Gioi_Thieu','Bang_Gia','Vi_Tri','Lien_He','Lich_Su');
+        </script>
+        <% }%>
+
+        <% if (isAdmin) { %>
+        <script>
+            fn_ScreenChange('Lich_Su','Gioi_Thieu','Bang_Gia','Vi_Tri','Lien_He','Cho_Trong');
+        </script>
+        <% }%>
+    </body>
+</html>

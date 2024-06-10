@@ -1,0 +1,102 @@
+/*Màn hình lịch sử*/
+#Lich_Su {
+    position: absolute;
+    left: 160px;
+    top: 11px;
+    width: 1180px;
+    height: 600px;
+    background-color: rgb(240 129 11);;
+    padding-left: 20px;
+}
+/*//////////////Hiển thị dữ liệu bảng 1 - Start/////////////////*/
+#div_Table_01 {
+    position: absolute;
+    left: 20px; top: 120px;
+    width: 640px; height: 470px;
+    overflow-y: scroll;
+    background-color: antiquewhite;
+}
+/*Table*/
+#table_01 {
+    position: absolute;
+    width:100%;
+}
+#table_01 tr{
+    cursor: pointer;
+}
+#table_01 tr:hover{background-color: #ddd;}
+#table_01   { overflow: auto; }
+#table_01 thead th { position: sticky; top: 0;  }
+/* Just common table stuff. Really. */
+#table_01  { border-collapse: collapse; width: 100%; }
+#table_01 th, td { padding: 8px 16px; text-align: center;}
+#table_01 th     { background:#eee; }
+
+/*//////////////TRƯỜNG TÌM KIẾM DỮ LIỆU/////////////////*/
+/*Lable tìm kiếm từ*/
+#lb_Search_Start {
+    color: rgb(26, 24, 24);
+    font-size: 14px;
+    font-weight: normal;
+    position: absolute;
+    left: 20px; top: 85px;
+    height: 30px;
+}
+/*Chọn ngày tháng bắt đầu*/
+#dtpk_Search_Start {
+    text-align: left;
+    position: absolute;
+    left: 44px;
+    top: 78px;
+    font-size: 14px;
+    height: 30px;
+}
+
+/*Lable tìm kiếm đến*/
+#lb_Search_End {
+    color: rgb(26, 24, 24);
+    font-size: 14px;
+    font-weight: normal;
+    position: absolute;
+    left: 234px; top: 85px;
+    height: 30px;
+}
+/*Chọn ngày tháng kết thúc*/
+#dtpk_Search_End {
+    text-align: left;
+    position: absolute;
+    left: 266px; top: 78px;
+    font-size: 14px;
+    height: 30px;
+}
+/*Nút tìm kiếm*/
+#btt_Search {
+    border: none;
+    background-color: DodgerBlue;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    display: inline-block;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    width: 105px; height: 30px;
+    left: 444px;
+    top: 78px;
+}
+
+/*Nút Excel*/
+#btt_Excel {
+    border: none;
+    background-color: rgb(29, 233, 63);
+    color: rgb(255, 255, 255);
+    text-align: center;
+    display: inline-block;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    width: 105px; height: 30px;
+    left: 555px;
+    top: 78px;
+}

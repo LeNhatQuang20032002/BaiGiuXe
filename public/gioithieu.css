@@ -1,0 +1,9 @@
+/*Màn hình chính*/
+#Gioi_Thieu {
+    position: absolute;
+    left: 160px;
+    top: 11px;
+    width: 1140px;
+    height: 600px;
+    background-color: rgb(0, 51, 102);
+}
